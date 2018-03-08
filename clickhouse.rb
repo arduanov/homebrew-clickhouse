@@ -1,8 +1,8 @@
 class Clickhouse < Formula
   desc "ClickHouse is a free analytic DBMS for big data."
   homepage "https://clickhouse.yandex"
-  url "https://github.com/yandex/ClickHouse.git", :tag => "v1.1.54343-stable"
-  version "v1.1.54343"
+  url "https://github.com/yandex/ClickHouse.git", :tag => "v1.1.54358-stable"
+  version "v1.1.54358"
 
   head "https://github.com/yandex/ClickHouse.git"
 
@@ -18,9 +18,9 @@ class Clickhouse < Formula
   depends_on "readline" => :build
   
   bottle do
-    root_url 'https://github.com/arduanov/homebrew-clickhouse/releases/download/v1.1.54343'
-    sha256 "e7aff6a3db6159b6e749d185da8bfed4013eee53f62245178b5b4e8ae129a5dd" => :high_sierra
-    sha256 "e7aff6a3db6159b6e749d185da8bfed4013eee53f62245178b5b4e8ae129a5dd" => :sierra
+    root_url 'https://github.com/arduanov/homebrew-clickhouse/releases/download/v1.1.54358'
+    sha256 "2925527c626184360ef667cf28e36ddea961a8b028e4b4f6fb06216b462402b7" => :high_sierra
+    sha256 "2925527c626184360ef667cf28e36ddea961a8b028e4b4f6fb06216b462402b7" => :sierra
   end
 
   def install
@@ -31,9 +31,6 @@ class Clickhouse < Formula
       s.gsub! "/var/log/", "#{var}/log/"
       s.gsub! "<!-- <max_open_files>262144</max_open_files> -->", "<max_open_files>262144</max_open_files>"
     end
-
-    # force sierra
-    inreplace "libs/libcommon/CMakeLists.txt", "APPLE_SIERRA_OR_NEWER 0", "APPLE_SIERRA_OR_NEWER 1"
 
     args = %W[
       -DENABLE_ICU=0,
