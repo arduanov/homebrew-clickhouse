@@ -17,6 +17,11 @@ class Clickhouse < Formula
   depends_on "libtool" => :build
   depends_on "readline" => :build
   
+  bottle do
+    root_url 'https://github.com/arduanov/homebrew-clickhouse/releases/download/v1.1.54362'
+    sha256 "8019d148c781f7e0ddf9dff84e52b31df8abca23bf817172e7b8efcca0665135" => :high_sierra
+    sha256 "8019d148c781f7e0ddf9dff84e52b31df8abca23bf817172e7b8efcca0665135" => :sierra
+  end
 
   def install
     mkdir "#{var}/clickhouse"
