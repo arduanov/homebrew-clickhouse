@@ -6,6 +6,10 @@ class Clickhouse < Formula
 
   head "https://github.com/yandex/ClickHouse.git"
 
+  devel do
+    url "https://github.com/yandex/ClickHouse.git", :tag => "v1.1.54370-stable"
+  end
+
   depends_on "gcc"
   depends_on "llvm" => :build  
   depends_on "mysql" => :build
