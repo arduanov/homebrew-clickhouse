@@ -10,17 +10,17 @@ class Clickhouse < Formula
     url "https://github.com/yandex/ClickHouse.git", :tag => "v1.1.54380-stable"
   end
 
-  depends_on "gcc"
-  depends_on "llvm" => :build  
+  depends_on "gcc@7"
+  depends_on "llvm" => :build
   depends_on "mysql" => :build
   depends_on "icu4c" => :build
-  depends_on "cmake" => :build 
+  depends_on "cmake" => :build
   depends_on "openssl" => :build
   depends_on "unixodbc" =>:build
   depends_on "gettext" => :build
   depends_on "libtool" => :build
   depends_on "readline" => :build
-  
+
   bottle do
     root_url 'https://github.com/arduanov/homebrew-clickhouse/releases/download/v1.1.54380'
     sha256 "56aae7c587a1e48c17264aa29952b229bddd8e4aa3dcecfcf9824071c8d736bb" => :high_sierra
