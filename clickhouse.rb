@@ -10,15 +10,16 @@ class Clickhouse < Formula
     url "https://github.com/yandex/ClickHouse.git", :tag => "v1.1.54381-stable"
   end
 
-  depends_on "gcc"
+  depends_on "gcc@7"
   depends_on "llvm" => :build  
   depends_on "mysql" => :build
   depends_on "icu4c" => :build
   depends_on "cmake" => :build 
   depends_on "openssl" => :build
   depends_on "unixodbc" =>:build
-  depends_on "gettext" => :build
   depends_on "libtool" => :build
+  depends_on "gettext" => :build
+  depends_on "zlib" => :build
   depends_on "readline" => :build
   
   bottle do
