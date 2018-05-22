@@ -14,12 +14,6 @@ brew tap arduanov/clickhouse
 
 ### Install ClickHouse
 ```bash
+brew upgrade
 brew install clickhouse
 ```
-
-### Or compile from sources
-```bash
-brew install cmake gcc mysql unixodbc readline gettext icu4c llvm openssl libtool
-brew install clickhouse --cc=gcc-7
-```
-
