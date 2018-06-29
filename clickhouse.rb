@@ -7,10 +7,10 @@ class Clickhouse < Formula
   head "https://github.com/yandex/ClickHouse.git"
 
   devel do
-    url "https://github.com/yandex/ClickHouse.git", :tag => "v1.1.54385-stable"
+    url "https://github.com/yandex/ClickHouse.git", :tag => "v1.1.54388-stable"
   end
 
-  depends_on "gcc@7"
+  depends_on "gcc"
   depends_on "llvm" => :build  
   depends_on "mysql" => :build
   depends_on "icu4c" => :build
