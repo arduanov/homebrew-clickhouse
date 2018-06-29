@@ -30,7 +30,7 @@ class Clickhouse < Formula
   def install
     mkdir "#{var}/clickhouse"
 
-    inreplace "dbms/src/Server/config.xml" do |s|
+    inreplace "dbms/programs/server/config.xml" do |s|
       s.gsub! "/var/lib/", "#{var}/lib/"
       s.gsub! "/var/log/", "#{var}/log/"
       s.gsub! "<!-- <max_open_files>262144</max_open_files> -->", "<max_open_files>262144</max_open_files>"
