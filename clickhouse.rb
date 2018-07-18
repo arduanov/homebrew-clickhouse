@@ -7,10 +7,10 @@ class Clickhouse < Formula
   head "https://github.com/yandex/ClickHouse.git"
 
   devel do
-    url "https://github.com/yandex/ClickHouse.git", :tag => "v1.1.54388-stable"
+    url "https://github.com/yandex/ClickHouse.git", :tag => "v1.1.54383-stable"
   end
 
-  depends_on "gcc"
+  depends_on "gcc@7"
   depends_on "llvm" => :build  
   depends_on "mysql" => :build
   depends_on "icu4c" => :build
@@ -30,7 +30,7 @@ class Clickhouse < Formula
   def install
     mkdir "#{var}/clickhouse"
 
-    inreplace "dbms/programs/server/config.xml" do |s|
+    inreplace "dbms/src/Server/config.xml" do |s|
       s.gsub! "/var/lib/", "#{var}/lib/"
       s.gsub! "/var/log/", "#{var}/log/"
       s.gsub! "<!-- <max_open_files>262144</max_open_files> -->", "<max_open_files>262144</max_open_files>"
