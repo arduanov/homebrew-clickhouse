@@ -20,7 +20,6 @@ class Clickhouse < Formula
   depends_on "gettext" => :build
   depends_on "zlib" => :build
   depends_on "readline" => :build
-  depends_on "ccache" => :build
   
   bottle do
     root_url 'https://github.com/arduanov/homebrew-clickhouse/releases/download/v1.1.54383'
@@ -44,20 +43,11 @@ class Clickhouse < Formula
       -DUSE_INTERNAL_BOOST_LIBRARY=1
       -DENABLE_EMBEDDED_COMPILER=0
       -DUSE_INTERNAL_LLVM_LIBRARY=1
-      -DCMAKE_C_COMPILER_LAUNCHER=/usr/local/bin/ccache
-      -DCMAKE_CXX_COMPILER_LAUNCHER=/usr/local/bin/ccache
     ]
 
     mkdir "build" do
-      system "mkdir", "-p", "/tmp/ccache"
-      system "ccache", "-o", "cache_dir=/tmp/ccache"
-      system "ccache", "-s"
-
       system "cmake", "..", *std_cmake_args, *args
       system "make"
-
-      system "ccache", "-s"
-
     end
 
     bin.install "#{buildpath}/build/dbms/programs/clickhouse"
