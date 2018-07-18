@@ -1,6 +1,10 @@
 language: objective-c
 os: osx
 osx_image: xcode9.4
+branches:
+  only:
+  - travis
+
 script:
   - HOMEBREW_NO_AUTO_UPDATE=1 brew install clickhouse.rb
   - brew test clickhouse
