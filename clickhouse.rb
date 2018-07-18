@@ -7,12 +7,11 @@ class Clickhouse < Formula
   head "https://github.com/yandex/ClickHouse.git"
 
   devel do
-    url "https://github.com/yandex/ClickHouse.git", :tag => "v1.1.54388-stable"
+    url "https://github.com/yandex/ClickHouse.git", :tag => "v1.1.54394-stable"
   end
 
   depends_on "gcc"
-  depends_on "llvm" => :build  
-  depends_on "mysql" => :build
+  depends_on "mysql@5.7" => :build
   depends_on "icu4c" => :build
   depends_on "cmake" => :build 
   depends_on "openssl" => :build
@@ -21,6 +20,7 @@ class Clickhouse < Formula
   depends_on "gettext" => :build
   depends_on "zlib" => :build
   depends_on "readline" => :build
+  depends_on "ccache" => :build
   
   bottle do
     root_url 'https://github.com/arduanov/homebrew-clickhouse/releases/download/v1.1.54383'
@@ -28,7 +28,8 @@ class Clickhouse < Formula
   end
 
   def install
-    mkdir "#{var}/clickhouse"
+    inreplace "libs/libmysqlxx/cmake/find_mysqlclient.cmake", "/usr/local/opt/mysql/lib", "/usr/local/opt/mysql@5.7/lib"
+    inreplace "libs/libmysqlxx/cmake/find_mysqlclient.cmake", "/usr/local/opt/mysql/include", "/usr/local/opt/mysql@5.7/include"
 
     inreplace "dbms/programs/server/config.xml" do |s|
       s.gsub! "/var/lib/", "#{var}/lib/"
@@ -37,16 +38,45 @@ class Clickhouse < Formula
     end
 
     args = %W[
-      -DENABLE_ICU=0,
-      -DENABLE_TESTS=0,
-      -DENABLE_TCMALLOC=0,
+      -DENABLE_ICU=0
+      -DENABLE_TESTS=0
+      -DENABLE_TCMALLOC=0
       -DUSE_INTERNAL_BOOST_LIBRARY=1
+      -DENABLE_EMBEDDED_COMPILER=0
+      -DUSE_INTERNAL_LLVM_LIBRARY=1
+      -DCMAKE_C_COMPILER_LAUNCHER=/usr/local/bin/ccache
+      -DCMAKE_CXX_COMPILER_LAUNCHER=/usr/local/bin/ccache
     ]
 
     mkdir "build" do
+      system "mkdir", "-p", "/tmp/ccache"
+      system "ccache", "-o", "cache_dir=/tmp/ccache"
+      system "ccache", "-s"
+
       system "cmake", "..", *std_cmake_args, *args
-      system "make", "install"
+      system "make"
+
+      system "ccache", "-s"
+
     end
+
+    bin.install "#{buildpath}/build/dbms/programs/clickhouse"
+    bin.install_symlink "clickhouse" => "clickhouse-client"
+    bin.install_symlink "clickhouse" => "clickhouse-server"
+    bin.install_symlink "clickhouse" => "clickhouse-local"
+    bin.install_symlink "clickhouse" => "clickhouse-compressor"
+    bin.install_symlink "clickhouse" => "clickhouse-copier"
+    bin.install_symlink "clickhouse" => "clickhouse-format"
+    bin.install_symlink "clickhouse" => "clickhouse-lld"
+    bin.install_symlink "clickhouse" => "clickhouse-obfuscator"
+    bin.install_symlink "clickhouse" => "clickhouse-clang"
+
+    mkdir "#{etc}/clickhouse-client/"
+    (etc/"clickhouse-client").install "#{buildpath}/dbms/programs/client/clickhouse-client.xml"
+
+    mkdir "#{etc}/clickhouse-server/"
+    (etc/"clickhouse-server").install "#{buildpath}/dbms/programs/server/config.xml"
+    (etc/"clickhouse-server").install "#{buildpath}/dbms/programs/server/users.xml"
   end
 
   def plist; <<~EOS
