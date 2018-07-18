@@ -1,4 +1,4 @@
 language: generic
 os: osx
 script:
-  - brew install clickhouse.rb 
+  - HOMEBREW_NO_AUTO_UPDATE=1 brew install clickhouse.rb 
