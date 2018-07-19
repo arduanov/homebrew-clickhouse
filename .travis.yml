@@ -6,6 +6,7 @@ branches:
   - travis
 
 script:
-  - HOMEBREW_NO_AUTO_UPDATE=1 brew install clickhouse.rb
+  - brew install gcc
   - brew link --overwrite gcc
+  - brew install clickhouse.rb
   - brew test clickhouse.rb
