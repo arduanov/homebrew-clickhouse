@@ -1,8 +1,8 @@
 class Clickhouse < Formula
   desc "ClickHouse is a free analytic DBMS for big data."
   homepage "https://clickhouse.yandex"
-  url "https://github.com/yandex/ClickHouse.git", :tag => "v1.1.54383-stable"
-  version "1.1.54383"
+  url "https://github.com/yandex/ClickHouse.git", :tag => "v1.1.5439-stable"
+  version "1.1.5439"
 
   head "https://github.com/yandex/ClickHouse.git"
 
@@ -22,8 +22,8 @@ class Clickhouse < Formula
   depends_on "readline" => :build
   
   bottle do
-    root_url 'https://github.com/arduanov/homebrew-clickhouse/releases/download/v1.1.54383'
-    sha256 "646d98c692442f3330649838196296b37ae5ccfb49a51f1e0df89dc8e2dd1a0e" => :high_sierra
+    root_url 'https://github.com/arduanov/homebrew-clickhouse/releases/download/v1.1.5439'
+    sha256 "a323dcc8aac3d610a3b05c795d0c862b65d24891f10518e64f7e3906c3de40ca" => :high_sierra
   end
 
   def install
