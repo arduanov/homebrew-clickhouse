@@ -6,7 +6,7 @@ branches:
   - travis
 
 script:
-  - brew install gcc
-  - brew link --overwrite gcc
+  - brew update
   - brew install clickhouse.rb
+  - brew link --overwrite gcc
   - brew test clickhouse.rb
