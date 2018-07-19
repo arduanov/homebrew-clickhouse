@@ -22,7 +22,7 @@ class Clickhouse < Formula
   depends_on "readline" => :build
   
   bottle do
-    root_url 'https://github.com/arduanov/homebrew-clickhouse/releases/download/v1.1.5439'
+    root_url 'https://github.com/arduanov/homebrew-clickhouse/releases/download/v1.1.54394'
     sha256 "a323dcc8aac3d610a3b05c795d0c862b65d24891f10518e64f7e3906c3de40ca" => :high_sierra
   end
 
