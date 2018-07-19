@@ -7,4 +7,5 @@ branches:
 
 script:
   - HOMEBREW_NO_AUTO_UPDATE=1 brew install clickhouse.rb
+  - brew link --overwrite gcc
   - brew test clickhouse.rb
