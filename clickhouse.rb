@@ -2,7 +2,7 @@ class Clickhouse < Formula
   desc "ClickHouse is a free analytic DBMS for big data."
   homepage "https://clickhouse.yandex"
   url "https://github.com/yandex/ClickHouse.git", :tag => "v1.1.54394-stable"
-  version "1.1.54394_1"
+  version "1.1.54394"
 
   head "https://github.com/yandex/ClickHouse.git"
 
@@ -23,7 +23,7 @@ class Clickhouse < Formula
   
   bottle do
     cellar :any
-    rebuild 1
+    rebuild 2
     root_url 'https://github.com/arduanov/homebrew-clickhouse/releases/download/v1.1.54394'
     sha256 "ec4057ae98a2e153fa2ef96d7cbd8245d908c6e17de99e2ec7068413a47bfe8d" => :high_sierra
   end
