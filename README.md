@@ -1,6 +1,6 @@
 # Homebrew ClickHouse Tap
 
-Latest builds of [ClickHouse](https://clickhouse.yandex) for MacOS High Sierra.
+Builds of [ClickHouse](https://clickhouse.yandex) for MacOS.
 
 Build without ICU, support for collations and charset conversion functions disabled
 
@@ -16,4 +16,11 @@ brew tap arduanov/clickhouse
 ```bash
 brew upgrade
 brew install clickhouse
+```
+
+
+## Build bottle
+```bash
+brew install --build-bottle --cc=gcc-8 --devel clickhouse
+brew bottle --json clickhouse
 ```
