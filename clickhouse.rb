@@ -11,8 +11,8 @@ class Clickhouse < Formula
   end
 
   depends_on "gcc"
-  depends_on "cmake" => :build 
-  depends_on "ninja" => :build 
+  depends_on "cmake" => :build
+  depends_on "ninja" => :build
   depends_on "libtool" => :build
   depends_on "gettext" => :build
   depends_on "zlib" => :build
