@@ -7,15 +7,12 @@ class Clickhouse < Formula
   head "https://github.com/yandex/ClickHouse.git"
 
   devel do
-    url "https://github.com/yandex/ClickHouse.git", :tag => "v18.1.0-stable"
+    url "https://github.com/yandex/ClickHouse.git", :tag => "v19.5.3.8-stable"
   end
 
   depends_on "gcc"
-  depends_on "mysql@5.7" => :build
-  depends_on "icu4c" => :build
   depends_on "cmake" => :build 
-  depends_on "openssl" => :build
-  depends_on "unixodbc" =>:build
+  depends_on "ninja" => :build 
   depends_on "libtool" => :build
   depends_on "gettext" => :build
   depends_on "zlib" => :build
@@ -29,9 +26,6 @@ class Clickhouse < Formula
   end
 
   def install
-    inreplace "libs/libmysqlxx/cmake/find_mysqlclient.cmake", "/usr/local/opt/mysql/lib", "/usr/local/opt/mysql@5.7/lib"
-    inreplace "libs/libmysqlxx/cmake/find_mysqlclient.cmake", "/usr/local/opt/mysql/include", "/usr/local/opt/mysql@5.7/include"
-
     inreplace "dbms/programs/server/config.xml" do |s|
       s.gsub! "/var/lib/", "#{var}/lib/"
       s.gsub! "/var/log/", "#{var}/log/"
@@ -40,27 +34,29 @@ class Clickhouse < Formula
 
     args = %W[
       -DENABLE_TESTS=0
-      -DENABLE_TCMALLOC=0
-      -DUSE_INTERNAL_BOOST_LIBRARY=1
-      -DENABLE_EMBEDDED_COMPILER=1
-      -DUSE_INTERNAL_LLVM_LIBRARY=0
+      -DUSE_RDKAFKA=0
     ]
 
     mkdir "build" do
       system "cmake", "..", *std_cmake_args, *args
-      system "make"
+      system "ninja"
     end
 
     bin.install "#{buildpath}/build/dbms/programs/clickhouse"
+    bin.install_symlink "clickhouse" => "clickhouse-benchmark"
+    bin.install_symlink "clickhouse" => "clickhouse-clang"
     bin.install_symlink "clickhouse" => "clickhouse-client"
-    bin.install_symlink "clickhouse" => "clickhouse-server"
-    bin.install_symlink "clickhouse" => "clickhouse-local"
     bin.install_symlink "clickhouse" => "clickhouse-compressor"
     bin.install_symlink "clickhouse" => "clickhouse-copier"
+    bin.install_symlink "clickhouse" => "clickhouse-extract-from-config"
     bin.install_symlink "clickhouse" => "clickhouse-format"
     bin.install_symlink "clickhouse" => "clickhouse-lld"
+    bin.install_symlink "clickhouse" => "clickhouse-local"
     bin.install_symlink "clickhouse" => "clickhouse-obfuscator"
-    bin.install_symlink "clickhouse" => "clickhouse-clang"
+    bin.install_symlink "clickhouse" => "clickhouse-odbc-bridge"
+    bin.install_symlink "clickhouse" => "clickhouse-performance-test"
+    bin.install_symlink "clickhouse" => "clickhouse-server"
+
 
     mkdir "#{etc}/clickhouse-client/"
     (etc/"clickhouse-client").install "#{buildpath}/dbms/programs/client/clickhouse-client.xml"
