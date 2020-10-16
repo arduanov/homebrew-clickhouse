@@ -1,14 +1,10 @@
 class Clickhouse < Formula
   desc "ClickHouse is a free analytic DBMS for big data."
   homepage "https://clickhouse.yandex"
-  url "https://github.com/yandex/ClickHouse.git", :tag => "v19.5.3.8-stable"
+  url "https://github.com/yandex/ClickHouse.git", :tag => "v20.6.8.5-stable"
   version "19.5.3.8"
 
   head "https://github.com/yandex/ClickHouse.git"
-
-  devel do
-    url "https://github.com/yandex/ClickHouse.git", :tag => "v19.5.3.8-stable"
-  end
 
   depends_on "gcc@8"
   depends_on "cmake" => :build
