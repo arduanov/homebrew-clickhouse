@@ -30,6 +30,8 @@ class Clickhouse < Formula
     args = %W[
       -DENABLE_TESTS=0
       -DUSE_RDKAFKA=0
+      -DCMAKE_CXX_COMPILER=`which clang++` 
+      -DCMAKE_C_COMPILER=`which clang`
     ]
 
     mkdir "build" do
@@ -37,7 +39,7 @@ class Clickhouse < Formula
       system "ninja"
     end
 
-    bin.install "#{buildpath}/build/dbms/programs/clickhouse"
+    bin.install "#{buildpath}/build/programs/clickhouse"
     bin.install_symlink "clickhouse" => "clickhouse-benchmark"
     bin.install_symlink "clickhouse" => "clickhouse-clang"
     bin.install_symlink "clickhouse" => "clickhouse-client"
