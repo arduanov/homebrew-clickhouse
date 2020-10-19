@@ -14,6 +14,8 @@ class Clickhouse < Formula
   depends_on "zlib" => :build
   depends_on "readline" => :build
   depends_on "binutils" => :build
+  depends_on "protobuf" => :build
+
   
   bottle do
     root_url "https://homebrew.bintray.com/bottles-clickhouse"
