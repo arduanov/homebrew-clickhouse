@@ -14,11 +14,6 @@ class Clickhouse < Formula
   depends_on "zlib" => :build
   depends_on "readline" => :build
   
-  bottle do
-    cellar :any
-    root_url 'https://github.com/arduanov/homebrew-clickhouse/releases/download/v19.5.3.8'
-    sha256 "22c50b6f103a132d9e4abe0653c9c753721c5db2e7a4f8a20485721488b0131b" => :mojave
-  end
 
   def install
     inreplace "programs/server/config.xml" do |s|
