@@ -30,8 +30,8 @@ class Clickhouse < Formula
     args = %W[
       -DENABLE_TESTS=0
       -DUSE_RDKAFKA=0
-      -DCMAKE_CXX_COMPILER=`which clang++` 
-      -DCMAKE_C_COMPILER=`which clang`
+      -DCMAKE_CXX_COMPILER="`which clang++`"
+      -DCMAKE_C_COMPILER="`which clang`"
     ]
 
     mkdir "build" do
