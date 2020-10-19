@@ -49,11 +49,11 @@ class Clickhouse < Formula
 
 
     mkdir "#{etc}/clickhouse-client/"
-    (etc/"clickhouse-client").install "#{buildpath}/dbms/programs/client/clickhouse-client.xml"
+    (etc/"clickhouse-client").install "#{buildpath}/programs/client/clickhouse-client.xml"
 
     mkdir "#{etc}/clickhouse-server/"
-    (etc/"clickhouse-server").install "#{buildpath}/dbms/programs/server/config.xml"
-    (etc/"clickhouse-server").install "#{buildpath}/dbms/programs/server/users.xml"
+    (etc/"clickhouse-server").install "#{buildpath}/programs/server/config.xml"
+    (etc/"clickhouse-server").install "#{buildpath}/programs/server/users.xml"
   end
 
   def plist; <<~EOS
