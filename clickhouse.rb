@@ -14,6 +14,11 @@ class Clickhouse < Formula
   depends_on "zlib" => :build
   depends_on "readline" => :build
   
+  bottle do
+    root_url "https://homebrew.bintray.com/bottles-clickhouse"
+    rebuild 1
+    sha256 "3bd989f4fa2ee09e0abb7af989ee5c537f032633ea0c077c8d1ca78653eb7740" => :catalina
+  end
 
   def install
     inreplace "programs/server/config.xml" do |s|
