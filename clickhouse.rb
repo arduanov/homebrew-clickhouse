@@ -32,6 +32,7 @@ class Clickhouse < Formula
     args = %W[
       -DENABLE_TESTS=0
       -DUSE_RDKAFKA=0
+      -DCMAKE_CXX_FLAGS="-std=c++11 -stdlib=libc++"
     ]
 
     mkdir "build" do
