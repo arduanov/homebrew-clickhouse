@@ -31,8 +31,6 @@ class Clickhouse < Formula
     args = %W[
       -DENABLE_TESTS=0
       -DUSE_RDKAFKA=0
-      -DCMAKE_CXX_STANDARD=11
-      -DCMAKE_CXX_STANDARD_REQUIRED=ON
     ]
 
     mkdir "build" do
