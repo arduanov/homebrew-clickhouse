@@ -1,8 +1,8 @@
 class Clickhouse < Formula
   desc "ClickHouse is a free analytic DBMS for big data."
   homepage "https://clickhouse.yandex"
-  url "https://github.com/yandex/ClickHouse.git", :tag => "v20.9.3.45-stable"
-  version "20.9.3.45"
+  url "https://github.com/yandex/ClickHouse.git", :tag => "v20.6.8.5-stable"
+  version "20.6.8.5"
 
   head "https://github.com/yandex/ClickHouse.git"
 
@@ -12,7 +12,7 @@ class Clickhouse < Formula
   depends_on "gettext" => :build
   depends_on "zlib" => :build
   depends_on "readline" => :build
-  depends_on "binutils" => :build
+  depends_on "llvm" => :build
 
 
   
@@ -31,7 +31,6 @@ class Clickhouse < Formula
     args = %W[
       -DENABLE_TESTS=0
       -DUSE_RDKAFKA=0
-      -DSANITIZER_LIMIT_FRAME_SIZE=FALSE
     ]
 
     mkdir "build" do
