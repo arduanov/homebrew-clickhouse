@@ -6,7 +6,6 @@ class Clickhouse < Formula
 
   head "https://github.com/yandex/ClickHouse.git"
 
-  depends_on "gcc"
   depends_on "cmake" => :build
   depends_on "ninja" => :build
   depends_on "libtool" => :build
@@ -32,8 +31,6 @@ class Clickhouse < Formula
     args = %W[
       -DENABLE_TESTS=0
       -DUSE_RDKAFKA=0
-      -DCMAKE_CXX_COMPILER=/usr/local/bin/g++-10
-      -DCMAKE_C_COMPILER=/usr/local/bin/gcc-10
     ]
 
     mkdir "build" do
