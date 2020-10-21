@@ -31,6 +31,7 @@ class Clickhouse < Formula
     args = %W[
       -DENABLE_TESTS=0
       -DUSE_RDKAFKA=0
+      -DSANITIZER_LIMIT_FRAME_SIZE=0
     ]
 
     mkdir "build" do
