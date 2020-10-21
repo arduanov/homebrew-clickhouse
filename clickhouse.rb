@@ -13,6 +13,8 @@ class Clickhouse < Formula
   depends_on "gettext" => :build
   depends_on "zlib" => :build
   depends_on "readline" => :build
+  depends_on "binutils" => :build
+
 
   
   bottle do
