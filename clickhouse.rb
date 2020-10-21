@@ -30,6 +30,8 @@ class Clickhouse < Formula
     args = %W[
       -DENABLE_TESTS=0
       -DUSE_RDKAFKA=0
+      -DCMAKE_CXX_COMPILER=/usr/local/bin/g++
+      -DCMAKE_C_COMPILER=/usr/local/bin/gcc
     ]
 
     mkdir "build" do
