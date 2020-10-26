@@ -10,8 +10,8 @@ class Clickhouse < Formula
   depends_on "ninja" => :build
   depends_on "libtool" => :build
   depends_on "gettext" => :build
-  depends_on "zlib" => :build
-  depends_on "readline" => :build
+#   depends_on "zlib" => :build
+#   depends_on "readline" => :build
   depends_on "llvm" => :build
 
 
