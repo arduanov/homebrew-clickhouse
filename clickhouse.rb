@@ -11,8 +11,6 @@ class Clickhouse < Formula
   depends_on "libtool" => :build
   depends_on "gettext" => :build
   depends_on "llvm" => :build
-
-
   
   bottle do
     root_url "https://homebrew.bintray.com/bottles-clickhouse"
