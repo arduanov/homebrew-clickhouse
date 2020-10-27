@@ -31,8 +31,7 @@ class Clickhouse < Formula
     args = %W[
       -DENABLE_TESTS=0
       -DUSE_RDKAFKA=0
-      -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm/bin/clang++
-      -DCMAKE_C_COMPILER=/usr/local/opt/llvm/bin/clang
+      -DSANITIZE=undefined
     ]
 
     mkdir "build" do
