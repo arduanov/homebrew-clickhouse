@@ -10,8 +10,6 @@ class Clickhouse < Formula
   depends_on "ninja" => :build
   depends_on "libtool" => :build
   depends_on "gettext" => :build
-#   depends_on "zlib" => :build
-#   depends_on "readline" => :build
   depends_on "llvm" => :build
 
 
@@ -31,7 +29,7 @@ class Clickhouse < Formula
     args = %W[
       -DENABLE_TESTS=0
       -DUSE_RDKAFKA=0
-#      -DSANITIZE=undefined
+      -DSANITIZE=undefined
       -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm/bin/clang++
       -DCMAKE_C_COMPILER=/usr/local/opt/llvm/bin/clang
     ]
