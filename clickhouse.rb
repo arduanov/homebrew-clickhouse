@@ -24,7 +24,7 @@ class Clickhouse < Formula
       s.gsub! "<!-- <max_open_files>262144</max_open_files> -->", "<max_open_files>262144</max_open_files>"
     end
     inreplace "cmake/warnings.cmake" do |s|
-      s.gsub! "add_warning(frame-larger-than=32768)", "add_warning(frame-larger-than=131072)"
+      s.gsub! /add_warning\(frame-larger-than=(\d*)\)/, "add_warning(frame-larger-than=131072)"
     end
 
     args = %W[
