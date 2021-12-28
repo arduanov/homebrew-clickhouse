@@ -1,39 +1,33 @@
 class Clickhouse < Formula
   desc "ClickHouse is a free analytic DBMS for big data."
   homepage "https://clickhouse.yandex"
-  url "https://github.com/yandex/ClickHouse.git", :tag => "v19.5.3.8-stable"
-  version "19.5.3.8"
+  url "https://github.com/yandex/ClickHouse.git", :tag => "v21.12.3.32-stable"
+  version "21.12.3.32"
 
   head "https://github.com/yandex/ClickHouse.git"
 
-  devel do
-    url "https://github.com/yandex/ClickHouse.git", :tag => "v19.5.3.8-stable"
-  end
-
-  depends_on "gcc@8"
   depends_on "cmake" => :build
   depends_on "ninja" => :build
   depends_on "libtool" => :build
   depends_on "gettext" => :build
-  depends_on "zlib" => :build
-  depends_on "readline" => :build
+  depends_on "llvm" => :build
   
-  bottle do
-    cellar :any
-    root_url 'https://github.com/arduanov/homebrew-clickhouse/releases/download/v19.5.3.8'
-    sha256 "22c50b6f103a132d9e4abe0653c9c753721c5db2e7a4f8a20485721488b0131b" => :mojave
-  end
 
   def install
-    inreplace "dbms/programs/server/config.xml" do |s|
+    inreplace "programs/server/config.xml" do |s|
       s.gsub! "/var/lib/", "#{var}/lib/"
       s.gsub! "/var/log/", "#{var}/log/"
       s.gsub! "<!-- <max_open_files>262144</max_open_files> -->", "<max_open_files>262144</max_open_files>"
+    end
+    inreplace "cmake/warnings.cmake" do |s|
+      s.gsub! /add_warning\(frame-larger-than=(\d*)\)/, "add_warning(frame-larger-than=131072)"
     end
 
     args = %W[
       -DENABLE_TESTS=0
       -DUSE_RDKAFKA=0
+      -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm/bin/clang++
+      -DCMAKE_C_COMPILER=/usr/local/opt/llvm/bin/clang
     ]
 
     mkdir "build" do
@@ -41,7 +35,7 @@ class Clickhouse < Formula
       system "ninja"
     end
 
-    bin.install "#{buildpath}/build/dbms/programs/clickhouse"
+    bin.install "#{buildpath}/build/programs/clickhouse"
     bin.install_symlink "clickhouse" => "clickhouse-benchmark"
     bin.install_symlink "clickhouse" => "clickhouse-clang"
     bin.install_symlink "clickhouse" => "clickhouse-client"
@@ -58,11 +52,11 @@ class Clickhouse < Formula
 
 
     mkdir "#{etc}/clickhouse-client/"
-    (etc/"clickhouse-client").install "#{buildpath}/dbms/programs/client/clickhouse-client.xml"
+    (etc/"clickhouse-client").install "#{buildpath}/programs/client/clickhouse-client.xml"
 
     mkdir "#{etc}/clickhouse-server/"
-    (etc/"clickhouse-server").install "#{buildpath}/dbms/programs/server/config.xml"
-    (etc/"clickhouse-server").install "#{buildpath}/dbms/programs/server/users.xml"
+    (etc/"clickhouse-server").install "#{buildpath}/programs/server/config.xml"
+    (etc/"clickhouse-server").install "#{buildpath}/programs/server/users.xml"
   end
 
   def plist; <<~EOS
