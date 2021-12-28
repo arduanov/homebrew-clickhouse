@@ -1,8 +1,8 @@
 class Clickhouse < Formula
   desc "ClickHouse is a free analytic DBMS for big data."
   homepage "https://clickhouse.yandex"
-  url "https://github.com/yandex/ClickHouse.git", :tag => "v21.7.2.7-stable"
-  version "21.7.2.7"
+  url "https://github.com/yandex/ClickHouse.git", :tag => "v21.12.3.32-stable"
+  version "21.12.3.32"
 
   head "https://github.com/yandex/ClickHouse.git"
 
